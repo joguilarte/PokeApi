@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "bf019d04-d444-4033-acdb-31ab70ae8d2e",
+		"name": "PokeAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28960685"
+	},
+	"item": [
+		{
+			"name": "Login de usuarios (Tokens)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"usuario\",\r\n    \"password\": \"pass\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				},
+				"description": "(POST): Este endpoint te permite iniciar sesión y obtener un token de acceso. Debes enviar una solicitud POST a este endpoint con un cuerpo JSON que contenga el nombre de usuario y la contraseña del usuario que desea iniciar sesión. Si las credenciales son correctas, el endpoint devolverá un token de acceso en la respuesta."
+			},
+			"response": []
+		},
+		{
+			"name": "Registro de usuarios",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"nuevo_usuario\",\r\n    \"password\": \"contraseña_del_nuevo_usuario\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"register"
+					]
+				},
+				"description": "(POST): Este endpoint te permite registrar un nuevo usuario en la base de datos. Debes enviar una solicitud POST a este endpoint con un cuerpo JSON que contenga el nombre de usuario y la contraseña del nuevo usuario que deseas agregar. También debes incluir un token de acceso válido en el encabezado Authorization de la solicitud, con el prefijo Bearer. Si todo está correcto, el endpoint devolverá una respuesta indicando que el nuevo usuario ha sido registrado con éxito."
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar usuarios",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"usuario_a_eliminar\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/delete_user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"delete_user"
+					]
+				},
+				"description": "(DELETE): Este endpoint te permite eliminar un usuario de la base de datos. Debes enviar una solicitud DELETE a este endpoint con un cuerpo JSON que contenga el nombre de usuario del usuario que deseas eliminar. También debes incluir un token de acceso válido en el encabezado Authorization de la solicitud, con el prefijo Bearer. Si todo está correcto, el endpoint devolverá una respuesta indicando que el usuario ha sido eliminado con éxito."
+			},
+			"response": []
+		},
+		{
+			"name": "Listar usuarios",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/list_users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"list_users"
+					]
+				},
+				"description": "(GET): Este endpoint permite listar todos los usuarios en la base de datos. Debes enviar una solicitud GET a este endpoint e incluir un token de acceso válido en el encabezado Authorization de la solicitud, con el prefijo Bearer. Si todo está correcto, el endpoint devolverá una lista de todos los usuarios en la base de datos, incluyendo su nombre de usuario y si son administradores o no."
+			},
+			"response": []
+		},
+		{
+			"name": "Tipo de Pokemon segun su nombre",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/pokemon/type/<name>",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"pokemon",
+						"type",
+						"<name>"
+					]
+				},
+				"description": "(GET): Este endpoint te permite obtener el tipo de un Pokémon según su nombre. Debes reemplazar <name> en la URL con el nombre del Pokémon que deseas buscar. También debes incluir un token de acceso válido en el encabezado Authorization de la solicitud, con el prefijo Bearer. Si todo está correcto, el endpoint devolverá una lista de los tipos del Pokémon especificado."
+			},
+			"response": []
+		},
+		{
+			"name": "Pokemon al azar de un tipo específico",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/pokemon/random/<type>",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"pokemon",
+						"random",
+						"<type>"
+					]
+				},
+				"description": "\r\n(GET): Este endpoint te permite obtener un Pokémon al azar de un tipo específico. Debes reemplazar <type> en la URL con el tipo de Pokémon que deseas buscar. También debes incluir un token de acceso válido en el encabezado Authorization de la solicitud, con el prefijo Bearer. Si todo está correcto, el endpoint devolverá el nombre de un Pokémon al azar del tipo especificado."
+			},
+			"response": []
+		},
+		{
+			"name": "Pokemon con el nombre más largo de cierto tipo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/pokemon/longest-name/<type>",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"pokemon",
+						"longest-name",
+						"<type>"
+					]
+				},
+				"description": "(GET): Este endpoint te permite obtener el Pokémon con el nombre más largo de cierto tipo. Debes reemplazar <type> en la URL con el tipo de Pokémon que deseas buscar. También debes incluir un token de acceso válido en el encabezado Authorization de la solicitud, con el prefijo Bearer. Si todo está correcto, el endpoint devolverá el nombre del Pokémon con el nombre más largo del tipo especificado."
+			},
+			"response": []
+		}
+	]
+}
