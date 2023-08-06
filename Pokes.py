@@ -84,7 +84,7 @@ def list_users():
     return jsonify(users_list)
 
 
-# Endpoint para eliminar un usuario
+# Endpoint para eliminar un usuarios
 @app.route('/delete_user', methods=['DELETE'])
 @jwt_required()
 def delete_user():
