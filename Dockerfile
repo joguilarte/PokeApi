@@ -16,5 +16,5 @@ EXPOSE 80
 # Set the environment variable
 ENV NAME World
 
-# Run app.py when the container launches
-CMD ["python", "app.py"]
+# Run Pokes.py when the container launches
+CMD ["python", "Pokes.py"]
