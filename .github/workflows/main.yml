@@ -3,7 +3,7 @@ name: Build and push Docker image
 on:
   push:
     branches:
-      - Stable
+      - Develop
 
 env:
   IMAGE_NAME: jguilartegg/poke_dev
