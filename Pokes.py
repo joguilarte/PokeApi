@@ -132,4 +132,4 @@ def get_longest_name_pokemon(type):
     return jsonify(longest_name_pokemon)
 
 if __name__ == "__main__":
-    app.run()(host='0.0.0.0')
+    app.run(host='0.0.0.0')
