@@ -21,6 +21,7 @@ los parámetros de la URL.
 El usuario admin: 
 
 user: admin
+
 pass: pass
 
 Para usar los endpoints de la API con Postman, debes seguir estos 
