@@ -18,6 +18,11 @@ especificando el método HTTP adecuado (GET, POST, DELETE, etc.)
 y proporcionando los datos necesarios en el cuerpo de la solicitud o en 
 los parámetros de la URL.
 
+El usuario admin: 
+
+user: admin
+pass: admin
+
 Para usar los endpoints de la API con Postman, debes seguir estos 
 pasos:
 1. Abre Postman y crea una nueva solicitud.
@@ -36,7 +41,7 @@ password), selecciona la pestaña “Body” y luego selecciona “raw” y
 “JSON” en las opciones desplegables. Luego, ingresa los datos 
 necesarios en formato JSON en el campo de texto.
 5. Si el endpoint requiere un token de acceso JWT (todos los 
-endpoints excepto /login y /register), selecciona la pestaña 
+endpoints excepto register), selecciona la pestaña 
 “Headers” y agrega un nuevo encabezado con el nombre 
 “Authorization” y el valor “Bearer <token>”, reemplazando <token>
 con el token de acceso obtenido al iniciar sesión.
