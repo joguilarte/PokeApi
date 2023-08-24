@@ -52,7 +52,13 @@ BASE_URL = "https://pokeapi.co/api/v2/"
 def login():
     username = request.json.get('username', None)
     password = request.json.get('password', None)
-    user = User.query.filter_by(username=username).first()
+    
+    try:
+        user = User.query.filter_by(username=username).first()
+    except Exception as e:
+        app.logger.error(f'Error al consultar la base de datos: {e}')
+        return jsonify({"msg": "Lo siento, hubo un problema al consultar la base de datos. Por favor, inténtalo de nuevo más tarde o contacta al soporte técnico si el problema persiste."}), 500
+    
     if not user or not user.check_password(password):
         app.logger.warning(f'Intento fallido de inicio de sesión para el usuario {username}')
         return jsonify({"msg": "Credenciales incorrectas"}), 401
@@ -76,10 +82,14 @@ def register():
     if not username or not password:
         app.logger.warning(f'Faltan datos para registrar un nuevo usuario')
         return jsonify({"msg": "Faltan datos"}), 400
-
-    user = User(username, password)
-    db.session.add(user)
-    db.session.commit()
+    
+    try:
+        user = User(username, password)
+        db.session.add(user)
+        db.session.commit()
+    except Exception as e:
+        app.logger.error(f'Error al guardar el nuevo usuario en la base de datos: {e}')
+        return jsonify({"msg": "Lo siento, hubo un problema al guardar el nuevo usuario en la base de datos. Por favor, verifica que los datos ingresados sean correctos e inténtalo de nuevo más tarde o contacta al soporte técnico si el problema persiste."}), 500
     
     app.logger.info(f'Usuario {username} registrado con éxito por el administrador {current_user}')
     
@@ -138,7 +148,12 @@ def get_pokemon_type(name):
     if not name.isalpha():
         return jsonify({"msg": "El nombre del Pokémon solo debe contener letras"}), 400
     
-    response = requests.get(f"{BASE_URL}pokemon/{name}")
+    try:
+        response = requests.get(f"{BASE_URL}pokemon/{name}")
+    except Exception as e:
+        app.logger.error(f'Error al hacer la solicitud a la API externa: {e}')
+        return jsonify({"msg": "Lo siento, hubo un problema al hacer la solicitud a la API externa. Por favor, verifica tu conexión a Internet e inténtalo de nuevo más tarde o contacta al soporte técnico si el problema persiste."}), 500
+    
     data = response.json()
     types = [t["type"]["name"] for t in data["types"]]
     
@@ -154,7 +169,12 @@ def get_random_pokemon(type):
     if not type.isalpha():
         return jsonify({"msg": "El tipo de Pokémon solo debe contener letras"}), 400
     
-    response = requests.get(f"{BASE_URL}type/{type}")
+    try:
+        response = requests.get(f"{BASE_URL}type/{type}")
+    except Exception as e:
+        app.logger.error(f'Error al hacer la solicitud a la API externa: {e}')
+        return jsonify({"msg": "Lo siento, hubo un problema al hacer la solicitud a la API externa. Por favor, verifica tu conexión a Internet e inténtalo de nuevo más tarde o contacta al soporte técnico si el problema persiste."}), 500
+    
     data = response.json()
     pokemon = data["pokemon"]
     random_pokemon = random.choice(pokemon)["pokemon"]["name"]
@@ -171,7 +191,12 @@ def get_longest_name_pokemon(type):
     if not type.isalpha():
         return jsonify({"msg": "El tipo de Pokémon solo debe contener letras"}), 400
     
-    response = requests.get(f"{BASE_URL}type/{type}")
+    try:
+        response = requests.get(f"{BASE_URL}type/{type}")
+    except Exception as e:
+        app.logger.error(f'Error al hacer la solicitud a la API externa: {e}')
+        return jsonify({"msg": "Lo siento, hubo un problema al hacer la solicitud a la API externa. Por favor, verifica tu conexión a Internet e inténtalo de nuevo más tarde o contacta al soporte técnico si el problema persiste."}), 500
+    
     data = response.json()
     pokemon = data["pokemon"]
     longest_name_pokemon = max(pokemon, key=lambda p: len(p["pokemon"]["name"].split("-")[0]))["pokemon"]["name"].split("-")[0]
